@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏资源分享站 LCL游戏海</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'eva-blue': '#004E89',
+                        'eva-blue-dark': '#003863',
+                        'eva-blue-light': '#3A7CA5',
+                        'eva-gray': '#D9DCD6',
+                        'eva-dark': '#1D2731',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .hover-scale {
+                transition: transform 0.3s ease;
+            }
+            .hover-scale:hover {
+                transform: scale(1.05);
+            }
+            .search-highlight {
+                background-color: rgba(0, 78, 137, 0.3);
+                color: #004E89;
+                font-weight: bold;
+            }
+        }
+    </style>
+     <script src="https://cdn.tailwindcss.com"></script>
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+     <script>
+         tailwind.config = {
+             theme: {
+                 extend: {
+                     colors: {
+                         'eva-blue': '#004E89',
+                         'eva-blue-dark': '#003863',
+                         'eva-blue-light': '#3A7CA5',
+                         'eva-gray': '#D9DCD6',
+                         'eva-dark': '#1D2731',
+                     },
+                     fontFamily: {
+                         sans: ['Inter', 'system-ui', 'sans-serif'],
+                     },
+                 }
+             }
+         }
+     </script>
+     <style type="text/tailwindcss">
+         @layer utilities {
+             .content-auto {
+                 content-visibility: auto;
+             }
+             .text-shadow {
+                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+             }
+             .hover-scale {
+                 transition: transform 0.3s ease;
+             }
+             .hover-scale:hover {
+                 transform: scale(1.05);
+             }
+             .search-highlight {
+                 background-color: rgba(0, 78, 137, 0.3);
+                 color: #004E89;
+                 font-weight: bold;
+             }
+         }
+     </style>
+     <!-- 修改后的链接样式 - 只应用于游戏链接 -->
+     <style>
+         .game-link {
+             display: block;
+             margin-bottom: 10px;
+             padding: 10px;
+             border: 2px solid #e0e0e0;
+             border-radius: 12px;
+             text-align: center;
+             text-decoration: none;
+             color: #333;
+             transition: all 0.3s ease;
+             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+         }
+         .game-link:hover {
+             border-color: #4a90e2;
+             background-color: #f8f9fa;
+             transform: translateY(-2px);
+             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+         }
+     </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- 导航栏 -->
+    <nav id="navbar" class="bg-eva-blue text-white fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="#" class="text-2xl font-bold mr-8">游戏资源分享站 游戏补完计划</a>
+                <a href="https://space.bilibili.com/328060284?spm_id_from=333.1007.0.0" 
+                   class="flex items-center hover:bg-eva-blue-dark px-3 py-2 rounded-md transition-colors duration-300">
+                    <i class="fa-brands fa-bilibili mr-2"></i>
+                    <span>游戏视频</span>
+                </a>
+            </div>
+            
+            <!-- 搜索栏 -->
+            <div class="relative w-80">
+                <input type="text" id="search-input" placeholder="搜索游戏名称..." 
+                       class="w-full px-4 py-2 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-eva-blue-light">
+                <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-eva-blue">
+                    <i class="fa fa-search"></i>
+                </button>
+                <div id="search-results" class="absolute top-full left-0 right-0 mt-1 bg-white rounded-md shadow-lg hidden">
+                    <ul id="results-list" class="py-2 max-h-80 overflow-y-auto"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区 -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="images/制作 EVA 美女图片 (2).png" alt="EVA绫波丽" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-eva-blue/50"></div>
+        </div>
+        <div class="container mx-auto px-4 z-10 text-center">
+            <h1 class="text-[clamp(3rem,8vw,5rem)] font-bold text-white text-shadow mb-6">
+                游戏分享站
+            </h1>
+            <p class="text-[clamp(1.2rem,3vw,1.8rem)] text-white text-shadow mb-10 max-w-3xl mx-auto">
+                主机游戏/PC游戏/手游/游戏动漫杂志/模拟器/游戏视频
+            </p>
+            <a href="#categories" class="inline-block bg-eva-blue hover:bg-eva-blue-dark text-white font-bold py-4 px-8 rounded-full text-xl transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1">
+                游戏库
+            </a>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#categories" class="text-white text-3xl">
+                <i class="fa fa-angle-down"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- 游戏分类 -->
+    <section id="categories" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-[clamp(2rem,5vw,3rem)] font-bold text-center mb-16 text-eva-dark">
+                游戏分类
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+               <!-- 主机&掌机 -->
+               <a href="#console" class="category-card group bg-white rounded-xl overflow-hidden shadow-lg hover-scale category-link" data-target="console">
+                <div class="relative h-48">
+                    <img src="images/制作 EVA 美女图片 (3).png" alt="主机&掌机" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-eva-blue/40 group-hover:bg-eva-blue/60 transition-colors duration-300"></div>
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-bold text-eva-dark mb-2">主机&掌机</h3>
+                    <p class="text-gray-600">PS、Xbox、Switch等主机游戏</p>
+                </div>
+            </a>
+
+                <!-- 知名游戏IP系列 -->
+                <a href="#game-ip" class="category-card group bg-white rounded-xl overflow-hidden shadow-lg hover-scale category-link" data-target="game-ip">
+                    <div class="relative h-48">
+                        <img src="images/制作 EVA 美女图片 (4).png" alt="知名游戏IP系列" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-eva-blue/40 group-hover:bg-eva-blue/60 transition-colors duration-300"></div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-eva-dark mb-2">知名游戏IP系列</h3>
+                        <p class="text-gray-600">热门游戏系列的各种版本与资源</p>
+                    </div>
+                </a>
+
+                <!-- 怀旧游戏推荐 -->
+                <a href="#retro" class="category-card group bg-white rounded-xl overflow-hidden shadow-lg hover-scale category-link" data-target="retro">
+                    <div class="relative h-48">
+                        <img src="images/美里 明日香 绫波丽.jpeg" alt="怀旧游戏推荐" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-eva-blue/40 group-hover:bg-eva-blue/60 transition-colors duration-300"></div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-eva-dark mb-2">怀旧游戏推荐</h3>
+                        <p class="text-gray-600">经典游戏重制、复刻与原版资源</p>
+                    </div>
+                </a>
+
+                <!-- 改版游戏HACKS -->
+                <a href="#hacks" class="category-card group bg-white rounded-xl overflow-hidden shadow-lg hover-scale category-link" data-target="hacks">
+                    <div class="relative h-48">
+                        <img src="images/律子.jpeg" alt="改版游戏HACKS" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-eva-blue/40 group-hover:bg-eva-blue/60 transition-colors duration-300"></div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-eva-dark mb-2">改版游戏HACKS</h3>
+                        <p class="text-gray-600">各类游戏MOD、改版、增强版本</p>
+                    </div>
+                </a>
+
+
+                <!-- PC游戏 -->
+                <a href="#pc" class="category-card group bg-white rounded-xl overflow-hidden shadow-lg hover-scale category-link" data-target="pc">
+                    <div class="relative h-48">
+                        <img src="images/美里.jpeg" alt="PC游戏" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-eva-blue/40 group-hover:bg-eva-blue/60 transition-colors duration-300"></div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-eva-dark mb-2">PC游戏</h3>
+                        <p class="text-gray-600">各类大型3D、独立、小型PC游戏</p>
+                    </div>
+                </a>
+
+                <!-- 手机手游 -->
+                <a href="#mobile" class="category-card group bg-white rounded-xl overflow-hidden shadow-lg hover-scale category-link" data-target="mobile">
+                    <div class="relative h-48">
+                        <img src="images/强吻真嗣.jpeg" alt="手机手游" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-eva-blue/40 group-hover:bg-eva-blue/60 transition-colors duration-300"></div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-eva-dark mb-2">手机手游</h3>
+                        <p class="text-gray-600">安卓、iOS各类精品手机游戏</p>
+                    </div>
+                </a>
+
+                <!-- 模拟器 -->
+                <a href="#emulators" class="category-card group bg-white rounded-xl overflow-hidden shadow-lg hover-scale category-link" data-target="emulators">
+                    <div class="relative h-48">
+                        <img src="images/jojo eva.jpg" alt="模拟器" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-eva-blue/40 group-hover:bg-eva-blue/60 transition-colors duration-300"></div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-eva-dark mb-2">模拟器</h3>
+                        <p class="text-gray-600">各平台游戏模拟器及使用教程</p>
+                    </div>
+                </a>
+
+                 <!-- 电脑手机软件 -->
+                 <a href="#software" class="category-card group bg-white rounded-xl overflow-hidden shadow-lg hover-scale category-link" data-target="software">
+                    <div class="relative h-48">
+                        <img src="images/游戏适格者库展示 (1).png" alt="电脑手机软件" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-eva-blue/40 group-hover:bg-eva-blue/60 transition-colors duration-300"></div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-eva-dark mb-2">电脑手机软件</h3>
+                        <p class="text-gray-600">各类游戏辅助工具、模拟器、修改器</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏展示区域 -->
+    <section id="game-display" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 id="category-title" class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-center mb-12 text-eva-dark">
+                电脑手机软件
+            </h2>
+            
+            <div id="software" class="game-category hidden">
+                <style>
+                   .game-link {
+                        display: block;
+                        margin-bottom: 10px;
+                        text-decoration: none;
+                        color: inherit;
+                    }
+                   .game-link:hover {
+                        color: blue;
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+                </style>
+                <a href="https://pan.xunlei.com/s/VOQZfrlCVXLw2wycuF7uB_uyA1#" class="game-link" title="点击可跳转到下载链接，提取码: b3pw">PC/手机软件</a>
+            </div>
+           
+            <!-- 主机&掌机内容 -->
+            <div id="console" class="game-category hidden">
+                <style>
+                   .game-link {
+                        display: block;
+                        margin-bottom: 10px;
+                        text-decoration: none;
+                        color: inherit;
+                    }
+                   .game-link:hover {
+                        color: blue;
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+                </style>
+                <a href="https://pan.baidu.com/s/1yKlqmHKymcxqTfJyLRGlFA?pwd=pgpd" class="game-link" title="点击可跳转到下载链接，提取码: pgpd">SWITCH游戏</a>
+                <a href="https://pan.baidu.com/s/1lQlnqN7PnA_KiM0muNc3KA?pwd=2sie" class="game-link" title="点击可跳转到下载链接，提取码: 2sie">PS5游戏</a>
+                <a href="#" class="game-link" title="点击可跳转到下载链接。打开夸克网盘搜索加入群组：1391111413 文件在群内">PS4游戏：打开夸克网盘搜索加入群组：1391111413 文件在群内</a>
+                <a href="https://pan.quark.cn/s/8dec6a398821" class="game-link" title="点击可跳转到下载链接">PS4中文游戏合集</a>
+                <a href="https://pan.quark.cn/s/2b9f4501a1c9" class="game-link" title="点击可跳转到下载链接，提取码: Tpsc">「PS3游戏全集」</a>
+                <a href="https://pan.quark.cn/s/2711e2ef0719" class="game-link" title="点击可跳转到下载链接，提取码: GLvs">「PS3游戏+模拟器」</a>
+                <a href="https://pan.baidu.com/s/1gIsjQJ7Mu4qqNT541hsR1g?pwd=baka" class="game-link" title="点击可跳转到下载链接，提取码: baka">PS2</a>
+                <a href="https://pan.baidu.com/s/1TrE4ibO0WHAZBzRLODBhHw?pwd=usnj" class="game-link" title="点击可跳转到下载链接，提取码: usnj">PS1</a>
+                <a href="https://pan.baidu.com/s/12WbWBao28xTlEYVUqKtZsQ?pwd=hhqs" class="game-link" title="点击可跳转到下载链接，提取码: hhqs。--来自百度网盘超级会员v6的分享">PSP游戏</a>
+                <a href="https://pan.baidu.com/s/1dpKDL3-36_PuNc6nrfaGLQ?pwd=5bvn" class="game-link" title="点击可跳转到下载链接，提取码: 5bvn">PSV游戏</a>
+                <a href="https://pan.quark.cn/s/e745360b6bc1" class="game-link" title="点击可跳转到下载链接，提取码: s3bE">「XBOX360中文游256个+模拟器」</a>
+                <a href="https://pan.quark.cn/s/ac2a851f4a72" class="game-link" title="点击可跳转到下载链接">WiiU WUP格式官方游戏全集(单个压缩)</a>
+                <a href="https://pan.quark.cn/s/3e96713f920e" class="game-link" title="点击可跳转到下载链接，提取码: Vaxa">「WII游戏全集1700多个」</a>
+                <a href="https://pan.baidu.com/s/1yBY3dVdL7IHO04jDtqiMew?pwd=bikb" class="game-link" title="点击可跳转到下载链接，提取码: bikb">Nintendo 64 v2 Rom Collection</a>
+                <a href="https://pan.quark.cn/s/8bd47ab913d6" class="game-link" title="点击可跳转到下载链接，提取码: 2AXA">3DS游戏合集</a>
+                <a href="https://pan.quark.cn/s/27e62a03ed0a" class="game-link" title="点击可跳转到下载链接，提取码: vMwF">NDS游戏精选集</a>
+                <a href="https://pan.baidu.com/s/1HtFrL52k6io5kX1pNMHQRQ?pwd=yrtu" class="game-link" title="点击可跳转到下载链接，提取码: yrtu">NDS游戏精选毕业整合包by康康还在玩</a>
+                <a href="https://pan.quark.cn/s/c5a8dab6f5e3" class="game-link" title="点击可跳转到下载链接，提取码: WZC5">GBA游戏合集</a>
+                <a href="https://pan.xunlei.com/s/VOONSBMioTnrvegSqkqoMUbyA1?pwd=xhi6#" class="game-link" title="点击可跳转到下载链接，提取码: xhi6">街机+FC</a>
+                <a href="https://pan.quark.cn/s/c2ff4907a8fb" class="game-link" title="点击可跳转到下载链接">「MD中文游戏全集(179个)」</a>
+                <a href="https://pan.quark.cn/s/f616db0c8314" class="game-link" title="点击可跳转到下载链接">WII+NCG+PS2+PSP+DC+3DS+PSV</a>
+                <a href="https://pan.quark.cn/s/22082943d9b7" class="game-link" title="点击可跳转到下载链接">SFC超级任天堂 完全典藏版</a>
+                <a href="https://pan.quark.cn/s/5fc0720d9f82" class="game-link" title="点击可跳转到下载链接">fc（1286个）中文游戏全集</a>
+                <a href="https://pan.quark.cn/s/91348d2ca87f" class="game-link" title="点击可跳转到下载链接">N64+FC+GBA+NDS+SFC+SS+JAVA</a>
+            </div>
+            
+            <!-- 手机手游 -->
+            <div id="mobile" class="game-category hidden">
+                <style>
+                    .game-link {
+                        display: block;
+                        margin-bottom: 10px;
+                        text-decoration: none;
+                        color: inherit;
+                    }
+                    .game-link:hover {
+                    color: blue;
+                    text-decoration: underline;
+                    cursor: pointer;
+                    }
+                </style>
+                <a href="https://pan.quark.cn/s/c0af68366192" class="game-link" title="点击可跳转到下载链接，提取码: d8B8">++＋手游 按照月份</a>
+                <a href="https://pan.quark.cn/s/7dcac0ac9d0a" class="game-link" title="点击可跳转到下载链接，提取码: FUKu">安卓单机游戏 破解版经典手游</a>
+                <a href="https://pan.xunlei.com/s/VOQZcPOfDCKZ6RV0Xp2sJcA0A1#" class="game-link" title="点击可跳转到下载链接，提取码: bg3h">移动端3A大作 苹果+安卓</a>
+                <a href="https://pan.quark.cn/s/cbdf276f76d1" class="game-link" title="点击可跳转到下载链接，提取码: a4dA">「安卓单机游戏」按类型分类 256G</a>
+                <a href="https://pan.quark.cn/s/041cb2e4c4fc" class="game-link" title="点击可跳转到下载链接，提取码: qEqd">「手游大合集 4000+款【手机安装包+PC】」</a>
+                <a href="https://pan.quark.cn/s/9f79ab601e65" class="game-link" title="点击可跳转到下载链接">免费版后台游戏</a>
+                <a href="https://pan.quark.cn/s/a357aeba2230" class="game-link" title="点击可跳转到下载链接，提取码: 6Qmz">「安卓 游戏合集3130个+安卓 支持原生手柄游戏 1.1T」</a>
+                <a href="https://pan.quark.cn/s/1392aca16539" class="game-link" title="点击可跳转到下载链接，提取码: 9ek3">「980款Steam移植手机游戏版 930.5G」</a>
+                <a href="https://pan.quark.cn/s/468655ef42e8" class="game-link" title="点击可跳转到下载链接">「苹果，retroarch街机资源整合包」</a>
+                <a href="https://pan.quark.cn/s/0c1ee336ffc" class="game-link" title="点击可跳转到下载链接">IOS手游怀旧游戏合集</a>
+            </div>
+
+            <!-- 模拟器 -->
+            <div id="emulators" class="game-category hidden">
+                <style>
+                .game-link {
+                        display: block;
+                        margin-bottom: 10px;
+                        text-decoration: none;
+                        color: inherit;
+                    }
+                .game-link:hover {
+                        color: blue;
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+                </style>
+                <a href="https://pan.xunlei.com/s/VOONMs_-oTnrvegSqkqoJVyvA1?pwd=xxw8#" class="game-link" title="点击可跳转到下载链接，提取码: xxw8">手机模拟器 安卓+苹果 超全 ps3 ps4 switch</a>
+                <a href="https://pan.xunlei.com/s/VOONJMxQZVSV4A_wc1luFf3lA1?pwd=kyaa#" class="game-link" title="点击可跳转到下载链接，提取码: kyaa">安卓模拟器 超全</a>
+                <a href="https://pan.quark.cn/s/c81d52884fda" class="game-link" title="点击可跳转到下载链接，提取码: 4CzJ">GBA 3DS NDS 模拟器修改器</a>
+                <a href="https://pan.quark.cn/s/2ac103037465" class="game-link" title="点击可跳转到下载链接，提取码: yJwD">switch模拟器</a>
+                <a href="https://pan.baidu.com/s/1NKzPJHliudDFT2M9N-ZEvA?pwd=baka" class="game-link" title="点击可跳转到下载链接，提取码: baka">youzu模拟器 手机+PC</a>
+                <a href="https://pan.quark.cn/s/898d269398a2" class="game-link" title="点击可跳转到下载链接，提取码: 9uDK">「游戏杂志」</a>
+                <a href="https://pan.quark.cn/s/c3484b932bb3" class="game-link" title="点击可跳转到下载链接">动感新势力全集</a>
+            </div>
+
+            <!-- PC游戏 -->
+            <div id="pc" class="game-category hidden">
+                <style>
+                .game-link {
+                        display: block;
+                        margin-bottom: 10px;
+                        text-decoration: none;
+                        color: inherit;
+                    }
+                .game-link:hover {
+                        color: blue;
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+                </style>
+                <a href="https://pan.quark.cn/s/7a23182acf5a" class="game-link" title="点击可跳转到下载链接，提取码: YMtm">「PC游戏」</a>
+                <a href="https://pan.quark.cn/s/7010347a3d79" class="game-link" title="点击可跳转到下载链接">PC游戏20T合集</a>
+            </div>
+            
+            <!-- 游戏系列全集 -->
+            <div id="game-ip" class="game-category hidden">
+                <style>
+                   .game-link {
+                        display: block;
+                        margin-bottom: 10px;
+                        text-decoration: none;
+                        color: inherit;
+                    }
+                   .game-link:hover {
+                        color: blue;
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+                </style>
+                <a href="https://pan.xunlei.com/s/VOONIsciiYyeD8a2TS_2gmbdA1?pwd=t2ni#" class="game-link" title="点击可跳转到下载链接，提取码: t2ni">魔兽世界</a>
+                <a href="https://pan.quark.cn/s/934158b5c45d" class="game-link" title="点击可跳转到下载链接">「NS 游戏库【任天堂独占全家桶】」FGwv</a>
+                <a href="https://pan.baidu.com/s/1YlBS0fi_R3Ou1B5VTmH4Dg?pwd=2vtq" class="game-link" title="点击可跳转到下载链接，提取码: 2vtq">洛克人</a>
+                <a href="https://pan.xunlei.com/s/VOQZdBWT4Wis_Q7RUBvJAKe_A1#" class="game-link" title="点击可跳转到下载链接">恶魔城全系列</a>
+                <a href="https://pan.baidu.com/s/1yQ-1pIHWDIZA1m636rzdYA?pwd=fuf2" class="game-link" title="点击可跳转到下载链接，提取码: fuf2">战神系列</a>
+                <a href="https://pan.xunlei.com/s/VOONMe72kpXWAUOeFloSIoUvA1?pwd=qevf" class="game-link" title="点击可跳转到下载链接，提取码: qevf">大富翁全集</a>
+                <a href="https://pan.baidu.com/s/1aVSvTrryJzbUuI6Is_3PbQ" class="game-link" title="点击可跳转到下载链接">最终幻想系列</a>
+                <a href="https://pan.quark.cn/s/bfd35133ce16" class="game-link" title="点击可跳转到下载链接，提取码：F3Rk">真三国无双全集</a>
+                <a href="https://pan.quark.cn/s/7a565bcdd4c8" class="game-link" title="点击可跳转到下载链接">宝可梦全系列</a>
+                <a href="https://pan.quark.cn/s/978457efb2ce" class="game-link" title="点击可跳转到下载链接">孤岛惊魂系列历代合集</a>
+                <a href="https://pan.quark.cn/s/8f2a35242ea3" class="game-link" title="点击可跳转到下载链接">怪物猎人系列</a>
+                <a href="https://pan.quark.cn/s/641e947279a9" class="game-link" title="点击可跳转到下载链接">鬼泣系列</a>
+                <a href="https://pan.quark.cn/s/fc5a24ff27eb" class="game-link" title="点击可跳转到下载链接">孤岛惊魂系列历代合集</a>
+                <a href="https://pan.quark.cn/s/50fde482cb58" class="game-link" title="点击可跳转到下载链接">仙剑奇侠传系列</a>
+                <a href="https://pan.xunlei.com/s/VOONRSTnANYPmzu1Zc3BA1-HA1?pwd=imu6#" class="game-link" title="点击可跳转到下载链接，提取码: imu6">真人恋爱游戏</a>
+                <a href="https://pan.baidu.com/s/1xRHQuHYGJcft6jloPztlwQ" class="game-link" title="点击可跳转到下载链接">Galgame</a>
+                <a href="https://pan.xunlei.com/s/VOQZeV0NJT3zqO0H6HiJf0v0A1#" class="game-link" title="点击可跳转到下载链接，提取码: kgaq">宝开游戏系列全集</a>
+                <a href="https://pan.quark.cn/s/bb7a8709d621" class="game-link" title="点击可跳转到下载链接，提取码：FGwv">植物大战僵尸全集</a>
+                <a href="https://pan.baidu.com/s/1yQ-1pIHWDIZA1m636rzdYA?pwd=fuf2" class="game-link" title="点击可跳转到下载链接">战神系列</a>
+            </div>
+            
+            <!-- 怀旧游戏 -->
+            <div id="retro" class="game-category hidden">
+                <style>
+                   .game-link {
+                        display: block;
+                        margin-bottom: 10px;
+                        text-decoration: none;
+                        color: inherit;
+                    }
+                   .game-link:hover {
+                        color: blue;
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+                </style>
+                <a href="https://pan.baidu.com/s/1yhSuazoQvg3dniFRimVBqg" class="game-link" title="点击可跳转到下载链接，提取码: ndat">网游单机版游戏</a>
+                <a href="https://pan.xunlei.com/s/VOQZdcLEYgm5UGQFcyHIee8bA1#" class="game-link" title="点击可跳转到下载链接，提取码: rgec">PC电脑怀旧游戏 高清兼容</a>
+                <a href="https://pan.quark.cn/s/119d138a0674" class="game-link" title="点击可跳转到下载链接，提取码: Excf">「PC怀旧游戏」</a>
+                <a href="https://pan.quark.cn/s/17fc73f12607" class="game-link" title="点击可跳转到下载链接">「PC精装复古游戏500合集」</a>
+                <a href="https://pan.baidu.com/s/1EvfSDCy7IYXzQq2JCq0klw?pwd=f7ky" class="game-link" title="点击可跳转到下载链接，提取码: f7ky">C藏经阁游戏合集1-710期 带目录童年怀旧 收藏游戏 电脑单机</a>
+                <a href="https://pan.quark.cn/s/f0994f5935df" class="game-link" title="点击可跳转到下载链接">网单+单机+手机游戏合集</a>
+                <a href="https://pan.xunlei.com/s/VOQZd4CqmkiAM9YwMod238G7A1#" class="game-link" title="点击可跳转到下载链接，提取码: ahi6">街机超级合集 26G</a>
+                <a href="https://pan.quark.cn/s/8f2560cc157b" class="game-link" title="点击可跳转到下载链接，提取码: XXVc">「iFBAs街机资源合集（2000+街机roms+封面目录）」</a>
+                <a href="https://pan.xunlei.com/s/VOONRjRL46g-d-Ia7ONiQwlIA1?pwd=bkd2#" class="game-link" title="点击可跳转到下载链接，提取码: bkd2。复制这段内容后打开「手机迅雷 App」即可获取。无需下载在线查看，视频原画享倍速播放">Flash4399游戏1.6g</a>
+                <a href="https://pan.quark.cn/s/279816fd3a68" class="game-link" title="点击可跳转到下载链接，提取码: PT7t">「塞班153G资源」</a>
+                <a href="https://pan.quark.cn/s/035ed3806511" class="game-link" title="点击可跳转到下载链接">「文曲星LAVA-BAS游戏合集+安卓模拟器」</a>
+                <a href="https://pan.xunlei.com/s/VOQZiOS9iRp5tnYO-W6Oo7L5A1#" class="game-link" title="点击可跳转到下载链接，提取码: 45kg">魔兽争霸地图战役</a>
+                <a href="https://pan.xunlei.com/s/VOONRZ-68EhZuoDn-rIT1EFZA1?pwd=9wr8#" class="game-link" title="点击可跳转到下载链接，提取码: 9wr8。复制这段内容后打开「手机迅雷 App」即可获取。无需下载在线查看，视频原画享倍速播放">塞尔达传说时之笛3D虚幻5重置</a>
+                <a href="https://pan.baidu.com/s/1dwY2XqX6XnUwhiApRW9d3Q?pwd=baka" class="game-link" title="点击可跳转到下载链接，提取码: baka">罪恶都市次时代重置</a>
+                <a href="https://pan.quark.cn/s/1ec18cabe5d2" class="game-link" title="点击可跳转到下载链接，提取码: Cbhy">「PC+++安卓 机战BX+UX」</a>
+                <a href="https://pan.xunlei.com/s/VOQZepmytMXPCgmKZjYBmsgyA1#" class="game-link" title="点击可跳转到下载链接，提取码: 8u26">Mega Man 2.5D 1.1 Installer.exe</a>
+            </div>
+            
+            <!-- 游戏改版 -->
+            <div id="hacks" class="game-category hidden">
+                <style>
+                   .game-link {
+                        display: block;
+                        margin-bottom: 10px;
+                        text-decoration: none;
+                        color: inherit;
+                    }
+                   .game-link:hover {
+                        color: blue;
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+                </style>
+                <a href="https://pan.quark.cn/s/8bf0a8b68e3b" class="game-link" title="点击可跳转到下载链接，提取码: NbWQ">PS1修改版</a>
+                <a href="https://pan.quark.cn/s/d2883f663e1b" class="game-link" title="点击可跳转到下载链接">PS2改版游戏集合</a>
+                <a href="https://pan.quark.cn/s/867a7819d593" class="game-link" title="点击可跳转到下载链接">FC、GBA、MD、SFC hack游戏合集（35XX & Plus）</a>
+                <a href="https://pan.baidu.com/s/1Ok5X1eKxYHjksrvUOXTIJw?pwd=wgsy" class="game-link" title="点击可跳转到下载链接，提取码: wgsy">快打旋风：拳皇版</a>
+                <a href="https://pan.xunlei.com/s/VOONS_jkANYPmzu1Zc3BAj6xA1#" class="game-link" title="点击可跳转到下载链接，提取码: 4s45">合金弹头改版+正版</a>
+                <a href="https://pan.xunlei.com/s/VOONSo_PxMHWqYP88syFuAXGA1?pwd=karh#" class="game-link" title="点击可跳转到下载链接，提取码: karh">宝可梦国外改版</a>
+                <a href="https://pan.baidu.com/s/1B1tSKZvwtiZB081srXcQxg?pwd=baka" class="game-link" title="点击可跳转到下载链接，提取码: 提取码: baka">GBA和NDS还有3DS改版+工具</a>
+                <a href=" https://pan.baidu.com/s/1o_E5Fh5XeAm9yqWWcK4wzw?pwd=baka" class="game-link" title="点击可跳转到下载链接，提取码: baka">PC端宝可梦同人游戏</a>
+                <a href="https://pan.xunlei.com/s/VOONTAs4BfZqkLVZUK_KiOZPA1?pwd=6r3h#" class="game-link" title="点击可跳转到下载链接，提取码: 6r3h">东东的不死传说</a>
+                <a href="https://pan.xunlei.com/s/VOQZf6TBOUP8YsIpIZQ4-npkA1#" class="game-link" title="点击可跳转到下载链接，提取码: zsph">游聚平台 手机+PC 安装程序</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-eva-dark text-white py-12">
+        <div class="container mx-auto px-4">
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">EVA主题游戏分享站</h3>
+                    <p>游戏补完计划</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4"><a href="https://space.bilibili.com/328060284" class="text-white">游戏视频</a></h3>
+                    <p>微信游戏交流群：B站动态置顶</p>
+                    <p>邮箱：467487226@qq.com.com</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">关注B站账号：真嗣个巴嘎</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-eva-blue-light transition-colors duration-300">
+                            <i class="fa-brands fa-weibo text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-eva-blue-light transition-colors duration-300">
+                            <i class="fa-brands fa-wechat text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-eva-blue-light transition-colors duration-300">
+                            <i class="fa-brands fa-bilibili text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2025 免责声明 游戏仅供学习用</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-3');
+                navbar.classList.add('bg-eva-blue/90');
+                navbar.classList.add('backdrop-blur-sm');
+            } else {
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2');
+                navbar.classList.remove('bg-eva-blue/90');
+                navbar.classList.remove('backdrop-blur-sm');
+            }
+        });
+
+        // 分类切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取所有分类链接
+            const categoryLinks = document.querySelectorAll('.category-link');
+            // 获取所有游戏分类内容
+            const gameCategories = document.querySelectorAll('.game-category');
+            // 获取分类标题元素
+            const categoryTitle = document.getElementById('category-title');
+            
+            // 为每个分类链接添加点击事件
+            categoryLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 获取目标分类ID
+                    const targetId = this.getAttribute('data-target');
+                    
+                    // 更新分类标题
+                    const titleText = this.querySelector('h3').textContent;
+                    categoryTitle.textContent = titleText;
+                    
+                    // 隐藏所有分类内容
+                    gameCategories.forEach(category => {
+                        category.classList.add('hidden');
+                    });
+                    
+                    // 显示目标分类内容
+                    const targetCategory = document.getElementById(targetId);
+                    if (targetCategory) {
+                        targetCategory.classList.remove('hidden');
+                    }
+                    
+                    // 平滑滚动到游戏展示区域
+                    document.getElementById('game-display').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // 搜索功能（简单实现）
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            const resultsList = document.getElementById('results-list');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                
+                if (searchTerm.length < 2) {
+                    searchResults.classList.add('hidden');
+                    return;
+                }
+                
+                // 这里应该是从实际数据源搜索，这里简化处理
+                const allGames = [];
+                gameCategories.forEach(category => {
+                    const links = category.querySelectorAll('a.game-link');
+                    links.forEach(link => {
+                        allGames.push({
+                            title: link.textContent,
+                            url: link.href,
+                            code: link.getAttribute('title') || ''
+                        });
+                    });
+                });
+                
+                // 过滤匹配的游戏
+                const matchedGames = allGames.filter(game => 
+                    game.title.toLowerCase().includes(searchTerm) || 
+                    game.code.toLowerCase().includes(searchTerm)
+                );
+                
+                // 显示搜索结果
+                resultsList.innerHTML = '';
+                if (matchedGames.length > 0) {
+                    matchedGames.forEach(game => {
+                        const li = document.createElement('li');
+                        li.className = 'px-4 py-2 hover:bg-gray-100 transition-colors duration-200';
+                        
+                        // 高亮匹配的文本
+                        let highlightedTitle = game.title;
+                        if (game.title.toLowerCase().includes(searchTerm)) {
+                            const regex = new RegExp(`(${searchTerm})`, 'gi');
+                            highlightedTitle = game.title.replace(regex, '<span class="search-highlight">$1</span>');
+                        }
+                        
+                        li.innerHTML = `
+                            <a href="${game.url}" target="_blank" class="block">
+                                ${highlightedTitle}
+                                <div class="text-xs text-gray-500 mt-1">${game.code}</div>
+                            </a>
+                        `;
+                        resultsList.appendChild(li);
+                    });
+                    searchResults.classList.remove('hidden');
+                } else {
+                    resultsList.innerHTML = '<li class="px-4 py-2 text-gray-500">没有找到匹配的游戏</li>';
+                    searchResults.classList.remove('hidden');
+                }
+            });
+            
+            // 点击页面其他地方关闭搜索结果
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
